@@ -33,10 +33,6 @@ build/
 .vscode/
 
 ### config ###
+application.properties
+application-*.properties
 .env
-.env.local
-.env.*.local
-config/
-config/*.local
-application-*.yml
-application-*.yaml
