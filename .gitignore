@@ -38,3 +38,5 @@ build/
 .env.*.local
 config/
 config/*.local
+application-*.yml
+application-*.yaml
