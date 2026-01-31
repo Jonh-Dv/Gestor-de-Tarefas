@@ -2,11 +2,13 @@ package gestortarefas.com.br.gestortarefas.service;
 
 import gestortarefas.com.br.gestortarefas.entity.Tarefa;
 import gestortarefas.com.br.gestortarefas.repository.TarefaRepository;
+import org.hibernate.StaleStateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
 @Service
 public class TarefasService {
@@ -35,6 +37,10 @@ public class TarefasService {
 
     public Tarefa listarTarefaPorId(int idTarefa){
         return tarefaRepo.findById(idTarefa).orElse(null);
+    }
+
+    public List<Tarefa> listarTodasTarefas(){
+        return (List<Tarefa>) tarefaRepo.findAll();
     }
 
 
