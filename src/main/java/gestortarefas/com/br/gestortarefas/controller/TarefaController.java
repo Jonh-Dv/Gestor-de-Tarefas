@@ -5,10 +5,7 @@ import gestortarefas.com.br.gestortarefas.service.TarefasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/tarefas")
@@ -21,6 +18,12 @@ public class TarefaController {
     public ResponseEntity<Tarefa> salvarTarefa(@RequestBody Tarefa tarefa){
         Tarefa salva = tarefaService.salvarTarefa(tarefa);
         return ResponseEntity.status(HttpStatus.CREATED).body(salva);
+    }
+
+    @GetMapping("/listartarefaporid/{idTarefa}")
+    public ResponseEntity<Tarefa> listarTarefaPorId(@PathVariable int idTarefa){
+        Tarefa tarefa = tarefaService.listarTarefaPorId(idTarefa);
+        return ResponseEntity.status(HttpStatus.OK).body(tarefa);
     }
 
 }
