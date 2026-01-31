@@ -43,5 +43,13 @@ public class TarefasService {
         return (List<Tarefa>) tarefaRepo.findAll();
     }
 
+    public void deletarTarefa(int idTarefa){
+        if(!tarefaRepo.existsById(idTarefa)){
+            throw new StaleStateException("Tarefa com ID " + idTarefa + " não existe.");
+        } else {
+            tarefaRepo.deleteById(idTarefa);
+        }
+    }
+
 
 }
