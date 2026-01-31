@@ -14,18 +14,23 @@ public class TarefasService {
     @Autowired
     private TarefaRepository tarefaRepo;
 
-    public Tarefa salvarTarefa(Tarefa tarefa){
-
-        tarefa.setDataCriacaoTarefa(LocalDateTime.now());
-        if(tarefa.getStatusTarefa().equals("pendente")){
-            return tarefaRepo.save(tarefa);
-        } else if (tarefa.getStatusTarefa().equals("finalizada")) {
-            return tarefaRepo.save(tarefa);
-        } else if (tarefa.getStatusTarefa().equals("urgente")) {
-            return tarefaRepo.save(tarefa);
-        } else {
-            throw new RuntimeException("Erro ao salvar Tarefa");
+    public boolean validarStatusAndPrioridade(Tarefa tarefa){
+        if(!tarefa.getStatusTarefa().equals("pendente") && !tarefa.getStatusTarefa().equals("finalizada")){
+            if(!tarefa.getPrioridadeTarefa().equals("alta") && !tarefa.getPrioridadeTarefa().equals("media") && !tarefa.getPrioridadeTarefa().equals("baixa")){
+                return false;
+            } else {
+                return false;
+            }
         }
+        return true;
+    }
+
+    public Tarefa salvarTarefa(Tarefa tarefa){
+        if(!validarStatusAndPrioridade(tarefa)){
+            throw new IllegalArgumentException("Status ou Prioridade inválidos.");
+        }
+        tarefa.setDataCriacaoTarefa(LocalDateTime.now());
+        return tarefaRepo.save(tarefa);
     }
 
     public Tarefa listarTarefaPorId(int idTarefa){
